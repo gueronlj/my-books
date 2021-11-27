@@ -12,7 +12,8 @@ A tool for Bookies to keep track of bets and player accounts. (Hopefully more us
 
    The user enters  the proposition, the Bet amount, and the juice(tax).
 
-- A book will be displayed as a table. 
+- A book will be displayed as a table.
+
 - A user can quickly get a list of all their player's to see their ID's , account balances, and possible a history of all bets.
 
 - A user can quickly view/switch between different Books.

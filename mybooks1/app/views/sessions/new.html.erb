@@ -1,0 +1,10 @@
+<h3>Login</h3>
+
+<form action="<%= session_path %>" method="post">
+   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+   <input type="text" name="user[username]" placeholder = "User name"/><br/>
+   <input type="password" name="user[passsword]" placeholder = "Password"/><br/>
+   <input type="submit"/>
+</form>
+
+<a href="<%= new_user_path%>">Sign up, here</a>

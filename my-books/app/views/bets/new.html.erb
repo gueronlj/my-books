@@ -1,0 +1,7 @@
+<h3>Enter a bet</h3>
+<%= form_for @bets do |form| %>
+  <%= form.text_field :player, placeholder: "Player name" %>
+  <%= form.text_field :prop, placeholder: "Proposition" %>
+  <%= form.text_field :value, placeholder: "Ammount" %>
+  <%= form.submit %>
+<% end %>

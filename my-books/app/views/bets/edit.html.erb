@@ -1,0 +1,7 @@
+<h3>Edit details</h3>
+<%= form_for @bets do |form| %>
+  <%= form.text_field :player, placeholder: @bets.player %>
+  <%= form.text_field :prop, placeholder: @bets.prop %>
+  <%= form.text_field :value, placeholder: @bets.value %>
+  <%= form.submit %>
+<% end %>
