@@ -1,0 +1,6 @@
+<h3>Player List</h3>
+<ul>
+   <% @players.each do |player| %>
+      <li>Id:<%= player.id %>   <%= player.name %></li>
+   <% end %>
+</ul>

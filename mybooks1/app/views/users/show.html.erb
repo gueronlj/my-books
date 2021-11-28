@@ -5,12 +5,21 @@
 
 <% if @current_user %>
 <form action="<%=bets_path%>" method ="post">
-   <h3>Add a bet</h3>
+   <h3>Add a Bet</h3>
    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
    <input type="text" name="bet[prop]" placeholder="Proposition details"/>
    <input type="number" name="bet[value]" placeholder="Initial value"/>
    <input type="float" name="bet[juice]" placeholder="Juice (Example: 5% = 0.05)"/>
    <input type="hidden" name="bet[user_id]" value="<%= current_user.id %>"/>
+   <input type="submit"/>
+</form>
+
+<form action="<%= players_path %>" method ="post">
+   <h3>Add a Player</h3>
+   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+   <input type="text" name="player[name]" placeholder="Enter a name" />
+   <input type="text" name="player[contact]" placeholder="Contact info" />
+   <input type="float" name="player[balance]" placeholder="Starting balance" />
    <input type="submit"/>
 </form>
 <% end %>

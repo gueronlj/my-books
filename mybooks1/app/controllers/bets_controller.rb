@@ -4,7 +4,7 @@ class BetsController < ApplicationController
       @bets = Bet.all
       respond_to do |format|
          format.html { render 'index'}#if request format is html show regular.
-         format.json { render json:  @bets}#if request format is json, show as json object
+         format.json { render json: @bets}#if request format is json, show as json object
       end
    end
 
