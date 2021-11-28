@@ -19,4 +19,9 @@ class ApplicationController < ActionController::Base
    def require_current_user
       redirect_to new_session_path unless current_user
    end
+
+   private
+   def player_params
+      params.require(:player).permit(:name, :contact, :balance)
+   end
 end

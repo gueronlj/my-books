@@ -20,11 +20,15 @@ class BetsController < ApplicationController
    end
 
    def show
-
+      @bet = Bet.find(params[:id])
+      respond_to do |format|
+         format.html { render 'show'}
+         format.json { render json: @bet}
+      end
    end
 
    private
    def bet_params
-      params.require(:bet).permit(:prop, :value, :juice)
+      params.require(:bet).permit(:prop, :value, :juice, :player_id)
    end
 end

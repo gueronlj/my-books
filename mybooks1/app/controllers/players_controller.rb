@@ -8,11 +8,21 @@ class PlayersController < ApplicationController
       end
    end
    def create
-
+      @player = current_user.players.new(player_params)
+      if @player.save
+         redirect_to current_user
+      else
+         flash[:message] = @player.errors.full_messages.to_sentence
+         redirect_to current_user
+      end
    end
 
    def show
       @player = Player.includes(:bets).find(params[:id])
+      respond_to do |format|
+         format.html { render 'show'}
+         format.json { render json: @player}
+      end
    end
 
 end
