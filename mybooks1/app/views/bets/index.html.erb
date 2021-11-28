@@ -1,0 +1,6 @@
+<h3>All bets</h3>
+<ul>
+   <% @bets.each do |bet| %>
+      <li>ID:<%= bet.user_id %> <%= bet.prop %>  $<%= bet.value %> Juice: <%= bet.juice %></li>
+   <% end %>
+</ul>

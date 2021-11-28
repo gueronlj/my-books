@@ -4,7 +4,6 @@ class UsersController < ApplicationController
 
    def index
       @users = User.all
-
       respond_to do |format|
          format.html { render 'index'}#if request format is html show regular.
          format.json { render json:  @users}#if request format is json, show as json object
@@ -13,9 +12,9 @@ class UsersController < ApplicationController
 
    def create
       @user = User.new(user_params)
-
       if @user.save
-         redirect_to users_path
+         login!(@user)
+         redirect_to @user
       else
          flash[:message] = @user.errors.full_messages.to_sentence
          redirect_to new_user_path
@@ -32,7 +31,7 @@ class UsersController < ApplicationController
    end
 
    def find_user
-      @user = User.find(params[:id])#put this in a function so we dont have to write in every route. MORE DRY
+      @user = User.includes(:bets).find(params[:id])#put this in a function so we dont have to write in every route. MORE DRY
    end
 
    def find_current_user
