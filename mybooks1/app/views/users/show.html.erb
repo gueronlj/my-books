@@ -18,8 +18,8 @@
 
 <h3>Your Book</h3>
 <% @user.bets.each do |bet| %>
-   <h4> <%= bet.user_id%></h4>
-   <h4> <%= bet.prop%></h4>
-   <h4> $<%= bet.value%></h4>
-   <h4> <%= bet.juice%></h4>
+   <h5> <%= bet.user_id%></h5>
+   <h5> <%= bet.prop%></h5>
+   <h5> $<%= bet.value%></h5>
+   <h5> <%= bet.juice%></h5>
 <% end %>
