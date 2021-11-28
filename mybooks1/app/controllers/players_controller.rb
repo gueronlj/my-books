@@ -4,7 +4,7 @@ class PlayersController < ApplicationController
       @players = Player.all
       respond_to do |format|
          format.html { render 'index'}#if request format is html show regular.
-         format.json { render json: @players}#if request format is json, show as json object
+         format.json { render json: @players.to_json(include: [:bets, :user])}#if request format is json, show as json object
       end
    end
    def create
@@ -21,7 +21,7 @@ class PlayersController < ApplicationController
       @player = Player.includes(:bets).find(params[:id])
       respond_to do |format|
          format.html { render 'show'}
-         format.json { render json: @player}
+         format.json { render json: @player.to_json(include: [:bets, :user])}
       end
    end
 

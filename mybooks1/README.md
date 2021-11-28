@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Issues:
 
-Things you may want to cover:
+-  Entering an invalid player id throws a nasty error un-handled by flash.
 
-* Ruby version
+-  Any user can view other user's show pages by changing the URL.
+   User 1 can visit /users/2. NOT GOOD!
+   But forms still send from the logged-in user GOOD!
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+-  The password confirmation is currently not checked for.
+   When trying to check for  it, it till throw an error ('no attribute password_confirm').

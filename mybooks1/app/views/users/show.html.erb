@@ -1,4 +1,12 @@
+<header>
+   <ul>
+      <li><a href="<%= new_session_path%>">Login</a></li>
+      <li><%= button_to "Logout" , session_path, method: :delete %></li>
+      <li><a href="<%= new_user_path%>">Sign-up</a></li>
+   </ul>
 
+
+</header>
 <% if @current_user %>
  <p>Welcome, <%= @user.username %></p>
 <% end %>

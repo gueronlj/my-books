@@ -6,7 +6,7 @@ class UsersController < ApplicationController
       @users = User.all
       respond_to do |format|
          format.html { render 'index'}#if request format is html show regular.
-         format.json { render json:  @users}#if request format is json, show as json object
+         format.json { render json:  @users.to_json(include: [:bets, :players])}#if request format is json, show as json object
       end
    end
 
@@ -24,14 +24,14 @@ class UsersController < ApplicationController
    def show
       respond_to do |format|
          format.html { render 'show'}
-         format.json { render json: @user}
+         format.json { render json: @user.to_json(include: [:bets, :players])}
       end
    end
 
    private
 
    def user_params
-      params.require(:user).permit(:username, :password)
+      params.require(:user).permit(:username, :password)#TODO: Need to add password_confirm but it causes error
    end
 
    def find_user
