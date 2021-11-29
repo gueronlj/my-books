@@ -6,3 +6,4 @@
 <h5>Juice: <%= @bet.juice%></h5>
 <%= button_to "Delete" , bet_path, method: :delete %>
 <%= button_to "Edit" , edit_bet_path, method: :get %>
+<%= link_to "My Book" , @user, method: :get %>

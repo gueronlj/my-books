@@ -4,43 +4,70 @@
       <li><%= button_to "Logout" , session_path, method: :delete %></li>
       <li><a href="<%= new_user_path%>">Sign-up</a></li>
    </ul>
-
-
 </header>
+
 <% if @current_user %>
  <p>Welcome, <%= @user.username %></p>
 <% end %>
 
 <% if @current_user %>
-<form action="<%=bets_path%>" method ="post">
-   <h3>Add a Bet</h3>
-   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
-   <input type="text" name="bet[player_id]" placeholder="Enter Player's ID"/>
-   <input type="text" name="bet[prop]" placeholder="Proposition details"/>
-   <input type="number" name="bet[value]" placeholder="Initial value"/>
-   <input type="float" name="bet[juice]" placeholder="Juice (Example: 5% = 0.05)"/>
-   <input type="hidden" name="bet[user_id]" value="<%= current_user.id %>"/>
-   <input type="submit"/>
-</form>
+   <form action="<%=bets_path%>" method ="post">
+      <h3>Add a Bet</h3>
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+      <input type="text" name="bet[player_id]" placeholder="Enter Player's ID"/>
+      <input type="text" name="bet[prop]" placeholder="Proposition details"/>
+      <input type="number" name="bet[value]" placeholder="Initial value"/>
+      <input type="float" name="bet[juice]" placeholder="Juice (Example: 5% = 0.05)"/>
+      <input type="hidden" name="bet[user_id]" value="<%= current_user.id %>"/>
+      <input type="submit"/>
+   </form>
 
-<form action="<%= players_path %>" method ="post">
-   <h3>Add a Player</h3>
-   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
-   <input type="text" name="player[name]" placeholder="Enter a name" />
-   <input type="text" name="player[contact]" placeholder="Contact info" />
-   <input type="float" name="player[balance]" placeholder="Starting balance" />
-   <input type="hidden" name="player[user_id]" value="<%= current_user.id %>"/>
-   <input type="submit"/>
-</form>
-<% end %>
+   <form action="<%= players_path %>" method ="post">
+      <h3>Add a Player</h3>
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+      <input type="text" name="player[name]" placeholder="Enter a name" />
+      <input type="text" name="player[contact]" placeholder="Contact info" />
+      <input type="float" name="player[balance]" placeholder="Starting balance" />
+      <input type="hidden" name="player[user_id]" value="<%= current_user.id %>"/>
+      <input type="submit"/>
+   </form>
 
+   <h3>Your Book</h3>
+   <table>
+      <tr>
+         <th>Player</th>
+         <th>Proposition</th>
+         <th>Ammount</th>
+         <th>Juice</th>
+      </tr>
+      <% @user.bets.each do |bet| %>
+         <tr>
+            <th><%= link_to bet.player.name, "http://localhost:3000/players/#{bet.player.id}", method: "get" %></th>
+            <th><%= bet.prop%></th>
+            <th>$<%= bet.value%></th>
+            <th><%= bet.juice%></th>
+            <th><%= link_to "Details", "http://localhost:3000/bets/#{bet.id}", method: "get" %></th>
+         </tr>
+      <% end %>
+   </table>
 
-<h3>Your Book</h3>
-<% @user.bets.each do |bet| %>
-   <h5>Player ID: <%= bet.player_id%></h5>
-   <h5> <%= bet.prop%></h5>
-   <h5> $<%= bet.value%></h5>
-   <h5> <%= bet.juice%></h5>
-   <%= link_to "Delete", "http://localhost:3000/bets/#{bet.id}", method: "delete" %>
-   <%= link_to "Details", "http://localhost:3000/bets/#{bet.id}", method: "get" %>
+   <h3>Your Players</h3>
+   <table>
+      <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Contact Info</th>
+         <th>Balance</th>
+         <th>Total Wins</th>
+      </tr>
+      <% @players.each do |player| %>
+         <tr>
+            <th><%= player.id %></th>
+            <th><a href="/players/<%=player.id%>"><%= player.name %></th>
+            <th><%=player.contact%></th>
+            <th>$<%=player.balance%></th>
+            <th><%=player.wins%></th>  
+         </tr>
+      <% end %>
+   </table>
 <% end %>

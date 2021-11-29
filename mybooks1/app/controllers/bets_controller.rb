@@ -4,7 +4,7 @@ class BetsController < ApplicationController
       @bets = Bet.all
       respond_to do |format|
          format.html { render 'index'}#if request format is html show regular.
-         format.json { render json: @bets}#if request format is json, show as json object
+         format.json { render json: @bets.to_json(include: [:user, :player])}#if request format is json, show as json object
       end
    end
 
@@ -20,6 +20,7 @@ class BetsController < ApplicationController
    end
 
    def show
+      @user = current_user
       @bet = Bet.find(params[:id])
       respond_to do |format|
          format.html { render 'show'}
@@ -41,7 +42,7 @@ class BetsController < ApplicationController
    def destroy
       @bet = Bet.find(params[:id])
       @bet.destroy
-      redirect_to bets_path
+      redirect_to current_user
    end
 
    private

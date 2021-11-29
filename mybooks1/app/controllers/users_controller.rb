@@ -22,6 +22,7 @@ class UsersController < ApplicationController
    end
 
    def show
+      @players = Player.all
       respond_to do |format|
          format.html { render 'show'}
          format.json { render json: @user.to_json(include: [:bets, :players])}
