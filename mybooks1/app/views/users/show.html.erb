@@ -41,4 +41,6 @@
    <h5> <%= bet.prop%></h5>
    <h5> $<%= bet.value%></h5>
    <h5> <%= bet.juice%></h5>
+   <%= link_to "Delete", "http://localhost:3000/bets/#{bet.id}", method: "delete" %>
+   <%= link_to "Details", "http://localhost:3000/bets/#{bet.id}", method: "get" %>
 <% end %>

@@ -1,0 +1,12 @@
+
+<form action="http://localhost:3000/bets/<%= @bet.id %>" method ="PUT">
+   <h3>Edit a Bet</h3>
+   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+   <input type="text" name="bet[player_id]" value="<%=@bet.player_id%>" />
+   <input type="text" name="bet[prop]" value="<%=@bet.prop%>"/>
+   <input type="number" name="bet[value]" value="<%=@bet.value%>"/>
+   <input type="float" name="bet[juice]" value="<%=@bet.juice%>"/>
+   <input type="hidden" name="bet[user_id]" value="<%= current_user.id %>"/>
+   <input type="hidden" name="bet[id]" value="<%= @bet.id %>"/>
+   <input type="submit"/>
+</form>

@@ -1,6 +1,7 @@
 <h3>All bets</h3>
 <ul>
    <% @bets.each do |bet| %>
-      <li>ID:<%= bet.player_id %> <%= bet.prop %>  $<%= bet.value %> Juice: <%= bet.juice %></li>
+      <li>ID:<%= bet.id %>  <%= bet.prop %>  $<%= bet.value %> Juice: <%= bet.juice %> Player ID: <%= bet.player_id %> </li>
+      <%= button_to "Delete" , bets_path, method: :delete %>
    <% end %>
 </ul>

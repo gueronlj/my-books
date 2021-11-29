@@ -10,3 +10,6 @@
 
 -  The password confirmation is currently not checked for.
    When trying to check for  it, it till throw an error ('no attribute password_confirm').
+
+-  When deleting a bet, the redirect needs to change depending on if the bet was removed from the user show page
+   or the bet show page

@@ -2,6 +2,10 @@ class SessionsController < ApplicationController
   def new
   end
 
+  def show
+     render json: {current_user: current_user}
+  end
+
   def create
      @user = User.find_by(username: user_params[:username])
      if @user.authenticate(user_params[:password])
