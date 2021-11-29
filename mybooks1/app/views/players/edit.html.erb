@@ -1,0 +1,7 @@
+<h3>Edit Player</h3>
+<%= form_for @player do |form| %>
+  <%= form.text_field :name, value: @player.name %>
+  <%= form.text_field :contact, value: @player.contact %>
+  <%= form.text_field :balance, value: @player.balance %>
+  <%= form.submit %>
+<% end %>

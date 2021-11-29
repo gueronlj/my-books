@@ -1,6 +1,7 @@
 <h3>Player List</h3>
 <ul>
    <% @players.each do |player| %>
-      <li>Id:<%= player.id %>   <%= player.name %></li>
+      <li><a href="/players/<%=player.id%>">Id:<%= player.id %>   <%= player.name %></a></li>
    <% end %>
 </ul>
+s

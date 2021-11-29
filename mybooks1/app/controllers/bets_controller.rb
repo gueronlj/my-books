@@ -1,5 +1,5 @@
 class BetsController < ApplicationController
-   before_action :require_current_user, only: [:create, :update]
+   before_action :require_current_user, only: [:create, :edit]
    def index
       @bets = Bet.all
       respond_to do |format|
@@ -27,14 +27,15 @@ class BetsController < ApplicationController
       end
    end
 
-   def update
-      @bet = Bet.find(params[:id])
-      @bet.update
-      render json: params
-   end
-
    def edit
       @bet = Bet.find(params[:id])
+   end
+
+   def update
+      @bet = Bet.find(params[:id])
+      if @bet.update(bet_params)
+         redirect_to bet_path
+      end
    end
 
    def destroy
