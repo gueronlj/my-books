@@ -1,6 +1,7 @@
 class User < ApplicationRecord
    has_many :players
    has_many :bets
+   has_many :books
    has_secure_password
 
    validates :username, presence: true
