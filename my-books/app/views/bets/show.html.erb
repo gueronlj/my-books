@@ -1,6 +1,0 @@
-<%= button_to "All Robots", bets_path, method: :get %>
-<h3><%= @bets.player%></h3>
-<p><%= @bets.prop%></p>
-<p>$<%= @bets.value%></p>
-<%= button_to "Edit", edit_bet_path(@bets), method: :get %>
-<%= button_to 'Remove', bets_path(@bets), method: :delete, data: { confirm: 'Are you sure you want to delete?' } %>

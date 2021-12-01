@@ -17,6 +17,12 @@
 </ul>
 
 <% if @current_user %>
+   <h3>Edit your Book</h3>
+   <%= form_for @book do |form| %>
+     <%= form.text_field :name, value: @book.name %>
+     <%= form.text_field :balance, value: @book.balance %>
+     <%= form.submit %>
+   <% end %><%= button_to "Delete" , book_path, method: :delete %>
    <form action="<%=bets_path%>" method ="post">
       <h3>Add a Bet</h3>
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
@@ -24,6 +30,7 @@
       <input type="text" name="bet[prop]" placeholder="Proposition details"/>
       <input type="number" name="bet[value]" placeholder="Initial value"/>
       <input type="float" name="bet[juice]" placeholder="Juice (Example: 5% = 0.05)"/>
+      <input type="text" name="bet[book_id]" placeholder="Book ID"/>
       <input type="hidden" name="bet[user_id]" value="<%= current_user.id %>"/>
       <input type="submit"/>
    </form>
