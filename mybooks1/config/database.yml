@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: mybooks1_production
-  username: mybooks1
-  password: <%= ENV['MYBOOKS1_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_URL'] %>
+  # username: mybooks1
+  # password: <%= ENV['MYBOOKS1_DATABASE_PASSWORD'] %>
