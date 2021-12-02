@@ -43,7 +43,7 @@
 
    <ul>
       <% @user.books.each do |book| %>
-         <li><a href="http://localhost:3000/books/<%=book.id%>"><%=book.name%></a></li>
+         <li><a href="https://protected-eyrie-39175.herokuapp.com/books/<%=book.id%>"><%=book.name%></a></li>
       <% end %>
    </ul>
 
@@ -57,11 +57,11 @@
       </tr>
       <% @user.bets.each do |bet| %>
          <tr>
-            <th><%= link_to bet.player.name, "http://localhost:3000/players/#{bet.player.id}", method: "get" %></th>
+            <th><%= link_to bet.player.name, "https://protected-eyrie-39175.herokuapp.com/players/#{bet.player.id}", method: "get" %></th>
             <th><%= bet.prop%></th>
             <th>$<%= bet.value%></th>
             <th><%= bet.juice%></th>
-            <th><%= link_to "Details", "http://localhost:3000/bets/#{bet.id}", method: "get" %></th>
+            <th><%= link_to "Details", "https://protected-eyrie-39175.herokuapp.com/bets/#{bet.id}", method: "get" %></th>
          </tr>
       <% end %>
    </table>
