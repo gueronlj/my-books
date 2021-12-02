@@ -4,4 +4,26 @@
 <h5>Current balance: $<%= @player.balance%></h5>
 <h5>Total wins: <%= @player.wins%></h5>
 <a href="http://localhost:3000/players/<%=@player.id%>/edit">Edit</a>
-<%= button_to "Delete" , player_path, method: :delete %>
+
+
+<table>
+   <h4><%= @player.name%>'s History</h4>
+   <tr>
+      <th>ID</th>
+      <th>Proposition</th>
+      <th>Ammount</th>
+      <th>Juice</th>
+      <th>Book</th>
+   </tr>
+   <% @player.bets.each do |bet| %>
+      <tr>
+         <th><%= bet.id %></th>
+         <th><%= bet.prop %></th>
+         <th><%= bet.value %></th>
+         <th><%= bet.juice %></th>
+         <th><%= bet.book_id %></th>
+      </tr>
+   <% end %>
+</table>
+
+<%= button_to "Delete Player" , player_path, method: :delete %>

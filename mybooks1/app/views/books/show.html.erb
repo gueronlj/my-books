@@ -10,7 +10,19 @@
  <p>Welcome, <%= @user.username %></p>
 <% end %>
 
+<ul>
+   <% @user.books.each do |book| %>
+      <li><a href="http://localhost:3000/books/<%=book.id%>"><%=book.name%></a></li>
+   <% end %>
+</ul>
+
 <% if @current_user %>
+   <h3>Edit your Book</h3>
+   <%= form_for @book do |form| %>
+     <%= form.text_field :name, value: @book.name %>
+     <%= form.text_field :balance, value: @book.balance %>
+     <%= form.submit %>
+   <% end %><%= button_to "Delete" , book_path, method: :delete %>
    <form action="<%=bets_path%>" method ="post">
       <h3>Add a Bet</h3>
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
@@ -33,21 +45,7 @@
       <input type="submit"/>
    </form>
 
-   <form class="" action="<%=books_path%>" method="post">
-      <h3>Create a new Book</h3>
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
-      <input type="hidden" name="book[user_id]" value="<%= current_user.id %>"/>
-      <input type="text" name="book[name]" placeholder="Title">
-      <input type="submit"/>
-   </form>
-
-   <ul>
-      <% @user.books.each do |book| %>
-         <li><a href="http://localhost:3000/books/<%=book.id%>"><%=book.name%></a></li>
-      <% end %>
-   </ul>
-
-   <h3>All Bets</h3>
+   <h3><%@book.name%></h3>
    <table>
       <tr>
          <th>Player</th>
@@ -55,7 +53,7 @@
          <th>Ammount</th>
          <th>Juice</th>
       </tr>
-      <% @user.bets.each do |bet| %>
+      <% @book.bets.each do |bet| %>
          <tr>
             <th><%= link_to bet.player.name, "http://localhost:3000/players/#{bet.player.id}", method: "get" %></th>
             <th><%= bet.prop%></th>

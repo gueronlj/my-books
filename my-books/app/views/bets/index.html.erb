@@ -1,5 +1,0 @@
-<ul>
-   <% @bets.each do |bet| %>
-      <li><%= link_to bet.player+'   '+bet.prop+'   $'+String(bet.value), bet_path(bet) %></li>
-   <% end %>
-</ul>

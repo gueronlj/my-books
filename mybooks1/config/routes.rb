@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
 
-   root 'sessions#new'
+   resources :books
+   root 'welcome#index'
 
    resources :players
    resources :bets
