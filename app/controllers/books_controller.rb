@@ -3,7 +3,8 @@ class BooksController < ApplicationController
    before_action :find_book, only: [:show, :update, :destroy]
 
    def index
-      @books = Book.all
+      @user = current_user
+      @books = current_user.books
       respond_to do |format|
          format.html { render 'index' }
          format.json { render json: @books.to_json(include: [:user, :bets]) }

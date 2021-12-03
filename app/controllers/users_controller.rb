@@ -6,7 +6,7 @@ class UsersController < ApplicationController
       @users = User.all
       respond_to do |format|
          format.html { render 'index'}#if request format is html show regular.
-         format.json { render json:  @users.to_json(include: [:bets, :players])}#if request format is json, show as json object
+         format.json { render json:  @users.to_json(include: [:books, :bets, :players])}#if request format is json, show as json object
       end
    end
 
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       @players = Player.all
       respond_to do |format|
          format.html { render 'show'}
-         format.json { render json: @user.to_json(include: [:bets, :players])}
+         format.json { render json: @user.to_json(include: [:books, :bets, :players])}
       end
    end
 
