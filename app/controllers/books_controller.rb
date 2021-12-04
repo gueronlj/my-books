@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-   before_action :require_current_user
+   # before_action :require_current_user
    before_action :find_book, only: [:show, :update, :destroy]
 
    def index
