@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
    def login!(user)
       session[:current_user_id] = user.id
-      render json: {current_user: current_user}
    end
 
    def logout!
