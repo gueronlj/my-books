@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
      @user = User.find_by(username: user_params[:username])
      if @user.authenticate(user_params[:password])
         login!(@user)
-        redirect_to current_user
+        # redirect_to current_user
         render json:  @user.to_json(include: [:books, :bets, :players])
      else
         flash[:message] = @user.errors.full_messages.to_sentence
