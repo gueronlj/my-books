@@ -13,15 +13,13 @@ class BooksController < ApplicationController
    end
 
    def show
-      # @user = current_user
       @user = User.find_by(id: @book.user_id)
       @players = @user.players
       respond_to do |format|
          format.html { render 'show' }
-         format.json { render json: @book.to_json(include: [:user, :bets=>
-                                                               {include: [:player]}
-                                                            ]
-                                                   )}
+         format.json { render json: @book.to_json(include: [:user,
+            :bets=>{include: [:player]}
+         ])}
       end
    end
 

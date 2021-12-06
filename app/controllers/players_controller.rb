@@ -1,7 +1,6 @@
 class PlayersController < ApplicationController
-   before_action :require_current_user, only: :create
    before_action :find_player, only: [:edit, :show, :update, :destroy]
-   
+
    def index
       @players = Player.all
       respond_to do |format|
@@ -11,12 +10,13 @@ class PlayersController < ApplicationController
    end
 
    def create
-      @player = current_user.players.new(player_params)
+      @user = User.find(player_params[:user_id])
+      @player = User.players.new(player_params)
       if @player.save
-         redirect_to current_user
+          render json: @player.to_json(include: [:bets, :user])}
       else
          flash[:message] = @player.errors.full_messages.to_sentence
-         redirect_to current_user
+         render json: {error: @player.errors.full_messages.to_sentence}
       end
    end
 

@@ -1,12 +1,7 @@
 class BetsController < ApplicationController
    # before_action :require_current_user, only: [:create, :edit]
    def index
-      @bets = Bet.where(book_id: bet_params[:book_id])
-         render json: @bets.to_json(include: [:user, :player, :book])
-   end
-
-   def book_bets
-      @bets = Bet.where(book_id: params[:book_id])
+      @bets = Bet.all
          render json: @bets.to_json(include: [:user, :player, :book])
    end
 
@@ -17,7 +12,7 @@ class BetsController < ApplicationController
          @book = Book.find(bet_params[:book_id])
          render json: @book.to_json(include: [:bets => {include: [:player]}])
       else
-         flash[:message] = @bet.errors.full_messages.to_sentence
+         # flash[:message] = @bet.errors.full_messages.to_sentence
          render json: {"error": @bet.errors.full_messages.to_sentence }
       end
    end
@@ -45,7 +40,6 @@ class BetsController < ApplicationController
    def destroy
       @bet = Bet.find(params[:id])
       @bet.destroy
-      # @bets = Bet.where(book_id: bet_params[:book_id])
       render json: @bet.to_json(include: [:user, :player, :book])
    end
 
