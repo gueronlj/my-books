@@ -5,6 +5,11 @@ class BetsController < ApplicationController
          render json: @bets.to_json(include: [:user, :player, :book])
    end
 
+   def book_bets
+      @bets = Bet.where(book_id: params[:book_id])
+         render json: @bets.to_json(include: [:user, :player, :book])
+   end
+
    def create
       @user = User.find(bet_params[:user_id])
       @bet = @user.bets.new(bet_params)#if we create it through the user.new method, it will should have easier realtionss with user model
