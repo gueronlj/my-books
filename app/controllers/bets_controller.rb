@@ -1,5 +1,5 @@
 class BetsController < ApplicationController
-   before_action :require_current_user, only: [:create, :edit]
+   # before_action :require_current_user, only: [:create, :edit]
    def index
       @bets = Bet.all
       respond_to do |format|
@@ -9,10 +9,10 @@ class BetsController < ApplicationController
    end
 
    def create
-      @user = current_user
+      @user = User.find(bet_params[:user_id])
       @bet = @user.bets.new(bet_params)
       if @bet.save
-         redirect_to @user
+         render json: @bet.to_json(include: [:user, :player])
       else
          flash[:message] = @bet.errors.full_messages.to_sentence
          redirect_to @user
