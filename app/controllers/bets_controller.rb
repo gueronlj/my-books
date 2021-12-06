@@ -10,7 +10,7 @@ class BetsController < ApplicationController
       @bet = @user.bets.new(bet_params)#if we create it through the user.new method, it will should have easier realtionss with user model
       if @bet.save
          @book = Book.find(bet_params[:book_id])
-         render json: @book.to_json(include: [:player, :bets])
+         render json: @book.to_json(include: [:bets])
       else
          flash[:message] = @bet.errors.full_messages.to_sentence
          render json: {"error": @bet.errors.full_messages.to_sentence }
