@@ -1,18 +1,16 @@
 class BetsController < ApplicationController
    # before_action :require_current_user, only: [:create, :edit]
    def index
-      @bets = Bet.all
-      respond_to do |format|
-         format.html { render 'index'}#if request format is html show regular.
-         format.json { render json: @bets.to_json(include: [:user, :player])}#if request format is json, show as json object
-      end
+      @bets = Bet.where(book_id: bet_params[:book_id])
+         render json: @bets.to_json(include: [:user, :player, :book])
    end
 
    def create
       @user = User.find(bet_params[:user_id])
+      @bets = Bet.where(book_id: bet_params[:book_id])
       @bet = @user.bets.new(bet_params)#if we create it through the user.new method, it will should have easier realtionss with user model
       if @bet.save
-         render json: @bet.to_json(include: [:user, :player, :book])
+         render json: @bets.to_json(include: [:user, :player, :book])
       else
          flash[:message] = @bet.errors.full_messages.to_sentence
          render json: {"error": @bet.errors.full_messages.to_sentence }
