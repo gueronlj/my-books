@@ -18,12 +18,8 @@ class BetsController < ApplicationController
    end
 
    def show
-      @user = current_user
       @bet = Bet.find(params[:id])
-      respond_to do |format|
-         format.html { render 'show'}
-         format.json { render json: @bet}
-      end
+      render json: @bet.to_json(include: [:user, :player])
    end
 
    def edit
@@ -33,7 +29,7 @@ class BetsController < ApplicationController
    def update
       @bet = Bet.find(params[:id])
       if @bet.update(bet_params)
-         redirect_to bet_path
+         render json: @bet.to_json(include: [:user, :player])
       end
    end
 
