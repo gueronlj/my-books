@@ -30,6 +30,8 @@ class BetsController < ApplicationController
       @bet = Bet.find(params[:id])
       if @bet.update(bet_params)
          render json: @bet.to_json(include: [:user, :player])
+      else
+         render json:{"error":@bet.errors.full_messages.to_sentence}
       end
    end
 
