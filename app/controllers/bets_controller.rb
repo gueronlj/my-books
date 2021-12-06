@@ -40,7 +40,8 @@ class BetsController < ApplicationController
    def destroy
       @bet = Bet.find(params[:id])
       @bet.destroy
-      redirect_to current_user
+      @bets = Bet.where(book_id: bet_params[:book_id])
+      render json: @bets.to_json(include: [:user, :player, :book])
    end
 
    private
