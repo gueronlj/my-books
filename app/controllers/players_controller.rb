@@ -16,7 +16,7 @@ class PlayersController < ApplicationController
           render json: @player.to_json(include: [:bets, :user])}
       else
          flash[:message] = @player.errors.full_messages.to_sentence
-         render json: {error: @player.errors.full_messages.to_sentence}
+         render json: {"error": @player.errors.full_messages.to_sentence}
       end
    end
 
