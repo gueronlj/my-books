@@ -1,10 +1,11 @@
 class BooksController < ApplicationController
-   before_action :require_current_user
+   # before_action :require_current_user
    before_action :find_book, only: [:show, :update, :destroy]
 
    def index
       @user = current_user
       @books = current_user.books
+      render json: @books.to_json(include: [:user, :bets])
       respond_to do |format|
          format.html { render 'index' }
          format.json { render json: @books.to_json(include: [:user, :bets]) }
