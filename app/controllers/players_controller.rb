@@ -11,7 +11,7 @@ class PlayersController < ApplicationController
 
    def create
       @user = User.find(player_params[:user_id])
-      @player = User.players.new(player_params)
+      @player = User.player.new(player_params)
       if @player.save
           render json: @player.to_json(include: [:bets, :user])
       else
