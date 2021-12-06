@@ -15,7 +15,7 @@ class BetsController < ApplicationController
          render json: @bet.to_json(include: [:user, :player])
       else
          flash[:message] = @bet.errors.full_messages.to_sentence
-         redirect_to @user
+         render json: {"error": @bet.errors.full_messages.to_sentence }
       end
    end
 
