@@ -22,10 +22,6 @@ class PlayersController < ApplicationController
    end
 
    def show
-      respond_to do |format|
-         format.html { render 'show'}
-         format.json { render json: @player.to_json(include: [:bets, :user])}
-      end
    end
 
    def edit
@@ -38,7 +34,8 @@ class PlayersController < ApplicationController
 
    def destroy
       @player.destroy
-      redirect_to current_user
+      @players= Player.where("user_id=?", player_params[:user_id])
+      render json: @players.to_json(include: [:bets, :user])
    end
 
    private
