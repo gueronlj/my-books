@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-   before_action :find_player, only: [:edit, :show, :update, :destroy]
+   before_action :find_player, only: [:edit, :update, :destroy]
 
    def index
    end
@@ -17,7 +17,7 @@ class PlayersController < ApplicationController
    end
 
    def show
-      @players = Player.where("user_id=?", params[:user_id])
+      @players = Player.where("user_id=?", params[:id])
       render json: @players.to_json(include: [:bets, :user])
    end
 
@@ -31,7 +31,7 @@ class PlayersController < ApplicationController
 
    def destroy
       @player.destroy
-      render json: @player.to_json(include: [:bets, :user]
+      render json: @player.to_json(include: [:bets, :user])
    end
 
    private
