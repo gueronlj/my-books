@@ -30,11 +30,8 @@ class PlayersController < ApplicationController
    end
 
    def destroy
-      if @player.destroy
-         render json: @player.to_json(include: [:bets, :user]
-      else
-         render json: ({"error":@player.errors.full_messages.to_sentence})
-      end
+      @player.destroy
+      render json: @player.to_json(include: [:bets, :user]
    end
 
    private
