@@ -1,12 +1,7 @@
 class PlayersController < ApplicationController
    before_action :find_player, only: [:edit, :show, :update, :destroy]
 
-   def index
-      @players = Player.all
-      respond_to do |format|
-         format.html { render 'index'}#if request format is html show regular.
-         format.json { render json: @players.to_json(include: [:bets, :user])}#if request format is json, show as json object
-      end
+   def index   
    end
 
    def create
@@ -22,6 +17,8 @@ class PlayersController < ApplicationController
    end
 
    def show
+      @players = Player.where("user_id=?", params[:user_id])
+      render json: @players.to_json(include: [:bets, :user])
    end
 
    def edit
@@ -34,8 +31,7 @@ class PlayersController < ApplicationController
 
    def destroy
       if @player.destroy
-         @players = Player.where("user_id=?", player_params[:user_id])
-         render json: @players.to_json(include: [:bets, :user])
+         render json: @player.to_json(include: [:bets, :user]
       else
          render json: {"error":@player.errors.full_messages.to_sentence}
       end
