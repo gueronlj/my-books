@@ -38,6 +38,7 @@ class PlayersController < ApplicationController
          render json: @players.to_json(include: [:bets, :user])
       else
          render json: {"error":@player.errors.full_messages.to_sentence}
+      end
    end
 
    private
