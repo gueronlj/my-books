@@ -33,11 +33,11 @@ class PlayersController < ApplicationController
    end
 
    def destroy
-      @player.destroy
-      if @players= Player.where("user_id=?", player_params[:user_id])
+      if @player.destroy
+         @players = Player.where("user_id=?", player_params[:user_id])
          render json: @players.to_json(include: [:bets, :user])
       else
-         render json: {"error":@players.errors.full_messages.to_sentence}
+         render json: {"error":@player.errors.full_messages.to_sentence}
    end
 
    private
