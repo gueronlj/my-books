@@ -29,13 +29,15 @@ class PlayersController < ApplicationController
 
    def update
       @player.update(player_params)
-      redirect_to current_user
+      render json: @player.to_json(include: [:bets, :user])
    end
 
    def destroy
       @player.destroy
-      @players= Player.where("user_id=?", player_params[:user_id])
-      render json: @players.to_json(include: [:bets, :user])
+      if @players= Player.where("user_id=?", player_params[:user_id])
+         render json: @players.to_json(include: [:bets, :user])
+      else
+         render json: {"error":@players.errors.full_messages.to_sentence}
    end
 
    private
