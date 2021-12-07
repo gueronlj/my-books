@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
    # before_action :require_current_user
-   before_action :find_book, only: [:show, :update, :destroy]
+   before_action :find_book, only: [:update, :destroy, :details]
 
    def index
       @user = current_user
@@ -12,24 +12,22 @@ class BooksController < ApplicationController
       end
    end
 
+   def details
+      render json: @book.to_json(include: [:user, :bets])
+   end
+
    def show
-      @user = User.find_by(id: @book.user_id)
-      @players = @user.players
-      respond_to do |format|
-         format.html { render 'show' }
-         format.json { render json: @book.to_json(include: [:user,
-            :bets=>{include: [:player]}
-         ])}
-      end
+      @books = Book.where("user_id=?", params[:id])
+      render json: @books.to_json(include: [:user, :bets])
    end
 
    def create
       @book = Book.new(book_params)
       if @book.save
-         redirect_to current_user
+         render json: @book.to_json(include: [:user, :bets])
       else
          flash[:message] = @book.errors.full_messages.to_sentence
-         redirect_to current_user
+         render json: {"error": @book.errors.full_messages.to_sentence}
       end
    end
 
