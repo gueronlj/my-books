@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
    before_action :find_player, only: [:edit, :show, :update, :destroy]
 
-   def index   
+   def index
    end
 
    def create
@@ -33,7 +33,7 @@ class PlayersController < ApplicationController
       if @player.destroy
          render json: @player.to_json(include: [:bets, :user]
       else
-         render json: {"error":@player.errors.full_messages.to_sentence}
+         render json: ({"error":@player.errors.full_messages.to_sentence})
       end
    end
 
