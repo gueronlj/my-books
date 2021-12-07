@@ -13,7 +13,7 @@ class PlayersController < ApplicationController
       @user = User.find(player_params[:user_id])
       @player = @user.players.new(player_params)
       if @player.save
-         @players = Player.find(player_params[:user_id])
+         @players = Player.find([player_params[:user_id]])
          render json: @players.to_json(include: [:bets, :user])
       else
          flash[:message] = @player.errors.full_messages.to_sentence
