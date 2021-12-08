@@ -21,6 +21,11 @@ class PlayersController < ApplicationController
       render json: @players.to_json(include: [:bets, :user])
    end
 
+   def details
+      @player = Player.find(params[:id])
+      render json: @player.to_json(include: [:bets, :user])
+   end
+
    def edit
    end
 

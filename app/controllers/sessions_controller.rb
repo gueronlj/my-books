@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
      if @user.authenticate(user_params[:password])
         login!(@user)
         # redirect_to current_user
-        render json:  @user.to_json(include: [:players, :books=>{include: [:bets]}])
+        render json:  @user.to_json(include: [:players, :books=>{include: [:bets=>{include: [:player]}]}])
      else
         flash[:message] = @user.errors.full_messages.to_sentence
         redirect_to new_session_path

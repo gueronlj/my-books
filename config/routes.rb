@@ -3,6 +3,7 @@ Rails.application.routes.draw do
    root 'welcome#index'
 
    get "/mybook/:id", to: "books#details"
+   get "/player-details/:id", to: "players#details"
    resources :books
    resources :players
    resources :bets
