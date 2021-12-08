@@ -13,7 +13,7 @@ class BooksController < ApplicationController
    end
 
    def details
-      render json: @book.to_json(include: [:user, :bets<={include: [:player]}])
+      render json: @book.to_json(include: [:user, :bets=>{include: [:player]}])
    end
 
    def show
@@ -24,7 +24,7 @@ class BooksController < ApplicationController
    def create
       @book = Book.new(book_params)
       if @book.save
-         render json: @book.to_json(include: [:user, :bets<={include: [:player]}])
+         render json: @book.to_json(include: [:user, :bets=>{include: [:player]}])
       else
          flash[:message] = @book.errors.full_messages.to_sentence
          render json: {"error": @book.errors.full_messages.to_sentence}
