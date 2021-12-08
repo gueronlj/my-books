@@ -42,7 +42,7 @@ class BooksController < ApplicationController
 
    def destroy
       @book.destroy
-      redirect_to current_user
+      render json: @book.to_json(include: [:user, :bets])
    end
 
    private
