@@ -14,10 +14,10 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
       if @user.save
          login!(@user)
-         redirect_to @user
+         render json:  @user.to_json(include: [:players, :books=>{include: [:bets=>{include: [:player]}]}])
       else
          flash[:message] = @user.errors.full_messages.to_sentence
-         redirect_to new_user_path
+         render json: {"error":  @user.errors.full_messages.to_sentence}
       end
    end
 
