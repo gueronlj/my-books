@@ -13,7 +13,7 @@ class BooksController < ApplicationController
    end
 
    def details
-      render json: @book.to_json(include: [:user, :bets])
+      render json: @book.to_json(include: [:user, :bets<={include: [:player]}])
    end
 
    def show
