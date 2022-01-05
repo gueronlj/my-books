@@ -9,13 +9,12 @@ class SessionsController < ApplicationController
 
   def create
      @user = User.find_by(username: user_params[:username])
-     if @user.authenticate(user_params[:password])
+     if @user.authenticate(user_params[:password] )
         login!(@user)
         # redirect_to current_user
         render json:  @user.to_json(include: [:players, :books=>{include: [:bets=>{include: [:player]}]}])
      else
-        flash[:message] = @user.errors.full_messages.to_sentence
-        redirect_to new_session_path
+        render json: { "error": @user.errors.full_messages }
      end
   end
 
